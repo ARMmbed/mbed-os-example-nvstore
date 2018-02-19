@@ -1,3 +1,4 @@
 BUILD/
 mbed-os/
 .mbed
+mbed_app.json

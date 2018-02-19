@@ -1,0 +1,15 @@
+{
+    "target_overrides": {
+        "*": {
+            "platform.stdio-baud-rate": 115200,
+            "platform.default-serial-baud-rate": 115200
+        },
+        "K64F": {
+            "nvstore.max_keys": 20,
+            "nvstore.area_1_address": "0xFC000",
+            "nvstore.area_1_size"   : "0x2000",
+            "nvstore.area_2_address": "0xFE000",
+            "nvstore.area_2_size"   : "0x2000"
+        }
+    }
+}

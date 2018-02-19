@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#if NVSTORE_ENABLED
 void display_return_code (int rc, int expected_rc)
 {
     char ret_str[32];
@@ -62,11 +63,13 @@ void display_return_code (int rc, int expected_rc)
     printf("Return value is %s (%s)\n",
            ret_str, (rc == expected_rc) ? "expected" : "NOT EXPECTED!");
 }
+#endif
 
 // Entry point for the example
 int main() {
     printf("\n--- Mbed OS NVStore example ---\n");
 
+#if NVSTORE_ENABLED
     uint16_t actual_len_bytes = 0;
 
     // NVStore is a sigleton, get its instance
@@ -79,19 +82,25 @@ int main() {
     // aren't)
     uint32_t value;
 
-    // Initialize NVstore. Note that it can be skipped, as it is lazily called by all APIs
+    // Initialize NVstore. Note that it can be skipped, as it is lazily called by all other APIs
     rc = nvstore.init();
     printf("Init NVStore. ");
     display_return_code(rc, NVSTORE_SUCCESS);
 
-    // Clear NVStore data. Should only be done regularly at initial installation
+    // Show NVStore size, maximum number of keys and area addresses and sizes
+    printf("NVStore size is %ld\n", nvstore.size());
+    printf("NVStore max number of keys is %d\n", nvstore.get_max_keys());
+    for (uint8_t area = 0; area < NVSTORE_NUM_AREAS; area++) {
+        uint32_t area_address;
+        size_t area_size;
+        nvstore.get_area_params(area, area_address, area_size);
+        printf("\nArea %d: address 0x%08lx, size %d (0x%x)\n", area, area_address, area_size, area_size);
+    }
+
+    // Clear NVStore data. Should only be done once at factory configuration
     rc = nvstore.reset();
     printf("Reset NVStore. ");
     display_return_code(rc, NVSTORE_SUCCESS);
-
-    // Show NVStore size and maximum number of keys
-    printf("NVStore size is %ld\n", nvstore.size());
-    printf("NVStore max number of keys is %d\n", nvstore.get_max_keys());
 
     // Now set some values to the same key
     key = 1;
@@ -126,10 +135,9 @@ int main() {
     printf("Get key %d. ", key);
     display_return_code(rc, NVSTORE_NOT_FOUND);
 
-
     key = 12;
 
-    // Now set another key once (can't set again)
+    // Now set another key once (it can't be set again)
     value = 50;
     rc = nvstore.set_once(key, sizeof(value), &value);
     printf("Set key %d once to value %ld. ", key, value);
@@ -150,6 +158,9 @@ int main() {
     rc = nvstore.get_item_size(key, actual_len_bytes);
     printf("Data size for key %d is %d. ", key, actual_len_bytes);
     display_return_code(rc, NVSTORE_SUCCESS);
+#else
+    printf("\nNVStore is disabled!\n");
+#endif
 
     printf("\n--- Mbed OS NVStore example done. ---\n");
 }

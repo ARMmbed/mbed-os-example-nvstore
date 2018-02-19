@@ -25,9 +25,9 @@ Although the board shown in this examples is K64F, the example should work on an
    cd mbed-os-example-nvstore
    ```
    
-2. Configure the NVStore areas (if needed).
+2. Start with the default NVStore configuration.
 
-   Edit ```mbed_app.json``` to reflect the addresses and sizes of both NVStore areas. Each area should reside on complete and continuous sectors (typcally one), which aren't used for any other purposes (like the programmed application). The values shown in this example supports the K64F and K82F boards (two last sectors for each). Add your own board there. 
+   Copy ```mbed_app-default-areas.json``` to  ```mbed_app.json```. This should use the last two sectors (4KB each) as NVStore areas.  
 
 3. Compile and generate binary.
 
@@ -50,6 +50,14 @@ Although the board shown in this examples is K64F, the example should work on an
  
  7. The serial console should now display a series of results following the NVStore API invocations. 
  
+ 8. Now copy ```mbed_app-8KB-areas.json``` to  ```mbed_app.json```. This should use 8KB areas (two pairs of last sectors) as NVStore areas.
+
+ 9. Repeat steps 3-7. Notice the changes in area prints
+
+ 10. Now copy ```mbed_app-disabled.json``` to  ```mbed_app.json```. This disables NVStore.
+
+ 11. Repeat steps 3-7. Notice that the program now prints that NVStore is disabled.
+
 ## Troubleshooting
 
 If you have problems, you can review the [documentation](https://os.mbed.com/docs/latest/tutorials/debugging.html) for suggestions on what could be wrong and how to fix it.
