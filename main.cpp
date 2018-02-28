@@ -53,9 +53,6 @@ void display_return_code (int rc, int expected_rc)
     case NVSTORE_OS_ERROR :
         strcpy(ret_str, "OS error");
         break;
-    case NVSTORE_BUFF_NOT_ALIGNED :
-        strcpy(ret_str, "Buffer not aligned");
-        break;
     case NVSTORE_ALREADY_EXISTS :
         strcpy(ret_str, "Key already exists");
         break;
@@ -88,13 +85,15 @@ int main() {
     display_return_code(rc, NVSTORE_SUCCESS);
 
     // Show NVStore size, maximum number of keys and area addresses and sizes
-    printf("NVStore size is %ld\n", nvstore.size());
-    printf("NVStore max number of keys is %d\n", nvstore.get_max_keys());
+    printf("NVStore size is %d\n", nvstore.size());
+    printf("NVStore max number of keys is %d (out of %d possible ones in this flash configuration)\n",
+            nvstore.get_max_keys(), nvstore.get_max_possible_keys());
+    printf("NVStore areas:\n");
     for (uint8_t area = 0; area < NVSTORE_NUM_AREAS; area++) {
         uint32_t area_address;
         size_t area_size;
         nvstore.get_area_params(area, area_address, area_size);
-        printf("\nArea %d: address 0x%08lx, size %d (0x%x)\n", area, area_address, area_size, area_size);
+        printf("Area %d: address 0x%08lx, size %d (0x%x)\n", area, area_address, area_size, area_size);
     }
 
     // Clear NVStore data. Should only be done once at factory configuration

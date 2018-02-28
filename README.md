@@ -18,45 +18,45 @@ Although the board shown in this examples is K64F, the example should work on an
 
 ##  Getting started ##
 
-1. Import the example.
+ 1. Import the example.
 
-   ```
-   mbed import mbed-os-example-nvstore
-   cd mbed-os-example-nvstore
-   ```
+    ```
+    mbed import mbed-os-example-nvstore
+    cd mbed-os-example-nvstore
+    ```
    
-2. Start with the default NVStore configuration.
+ 2. Start with the default NVStore configuration, which uses the last two sectors (4KB each) as NVStore areas.
 
-   Copy ```mbed_app-default-areas.json``` to  ```mbed_app.json```. This should use the last two sectors (4KB each) as NVStore areas.  
+ 3. Compile and generate binary.
 
-3. Compile and generate binary.
+    For example, for `GCC`:
 
-   For example, for `GCC`:
-
-   ```
-   mbed compile -t GCC_ARM -m K64F
-   ```
+    ```
+    mbed compile -t GCC_ARM -m K64F
+    ```
    
  4. Open a serial console session with the target platform using the following parameters:
- 
+
     * **Baud rate:** 115200
     * **Data bits:** 8
     * **Stop bits:** 1
     * **Parity:** None
- 
+
  5. Copy the application `mbed-os-example-nvstore.bin` in the folder `mbed-os-example-nvstore/BUILD/<TARGET NAME>/<PLATFORM NAME>` onto the target board.
- 
+
  6. Press the **RESET** button on the board to run the program
- 
+
  7. The serial console should now display a series of results following the NVStore API invocations. 
  
  8. Now copy ```mbed_app-8KB-areas.json``` to  ```mbed_app.json```. This should use 8KB areas (two pairs of last sectors) as NVStore areas.
 
- 9. Repeat steps 3-7. Notice the changes in area prints
+ 9. Repeat steps 3-7. Notice the changes in prints of area addresses and sizes and with the amount of possible keys this configuration can hold.
 
- 10. Now copy ```mbed_app-disabled.json``` to  ```mbed_app.json```. This disables NVStore.
+10. Now copy ```mbed_app-disabled.json``` to  ```mbed_app.json```. This disables NVStore.
 
- 11. Repeat steps 3-7. Notice that the program now prints that NVStore is disabled.
+11. Repeat steps 3-7. Notice that the program now prints that NVStore is disabled.
+
+12. To restore default configuration, copy ```mbed_app-default-areas.json``` to  ```mbed_app.json```.
 
 ## Troubleshooting
 
