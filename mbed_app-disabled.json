@@ -1,9 +1,0 @@
-{
-    "target_overrides": {
-        "*": {
-            "nvstore.enabled": false,
-            "platform.stdio-baud-rate": 115200,
-            "platform.default-serial-baud-rate": 115200
-        }
-    }
-}
