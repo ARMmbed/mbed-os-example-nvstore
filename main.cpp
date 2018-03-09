@@ -23,6 +23,7 @@
 // Entry point for the example
 int main() {
     printf("\n--- Mbed OS NVStore example ---\n");
+#if NVSTORE_ENABLED
 
     uint16_t actual_len_bytes = 0;
 
@@ -114,6 +115,9 @@ int main() {
     rc = nvstore.get_item_size(key, actual_len_bytes);
     printf("Data size for key %d is %d. ", key, actual_len_bytes);
     printf("Return code is %d\n", rc);
+#else
+    printf("NVStore is disabled for this board\n");
+#endif
 
     printf("\n--- Mbed OS NVStore example done. ---\n");
 }
