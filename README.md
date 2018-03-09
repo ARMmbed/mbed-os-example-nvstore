@@ -48,7 +48,7 @@ Although the board shown in this examples is K64F, the example should work on an
 
  7. The serial console should now display a series of results following the NVStore API invocations. 
  
- 8. Now copy `mbed_app-8KB-areas.json` to `mbed_app.json`. This should use 8KB areas (two pairs of last sectors) as NVStore areas.
+ 8. If you run this example on the K64F board, copy `mbed_app-K64F-8KB-areas.json` to `mbed_app.json`. This should use 8KB areas (two pairs of last sectors) as NVStore areas. If you run it on another board, the last sectors may have different addresses and sizes comparing to the K64F ones. You can copy the K64F NVstore configuration to your board's configuration. Then edit the configuration to use two pairs of the last board's sectors for NVStore.
 
  9. Repeat steps 3-7. Notice the changes in prints of area addresses and sizes and with the amount of possible keys this configuration can hold.
 
