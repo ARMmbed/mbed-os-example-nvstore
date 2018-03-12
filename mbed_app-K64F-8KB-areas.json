@@ -2,7 +2,8 @@
     "target_overrides": {
         "*": {
             "platform.stdio-baud-rate": 115200,
-            "platform.default-serial-baud-rate": 115200
+            "platform.default-serial-baud-rate": 115200,
+            "platform.stdio-convert-newlines": 1
         },
         "K64F": {
             "nvstore.max_keys": 20,
