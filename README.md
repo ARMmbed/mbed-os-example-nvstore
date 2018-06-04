@@ -48,8 +48,17 @@ Although the board shown in this examples is K64F, the example should work on an
 
  7. The serial console should now display a series of results following the NVStore API invocations. 
  
- 8. If you run this example on the K64F board, copy `mbed_app-K64F-8KB-areas.json` to `mbed_app.json`. This should use 8KB areas (two pairs of last sectors) as NVStore areas. If you run it on another board, the last sectors may have different addresses and sizes comparing to the K64F ones. You can copy the K64F NVstore configuration to your board's configuration. Then edit the configuration to use two pairs of the last board's sectors for NVStore.
-
+ 8. Unless specifically configured by the user, NVStore selects the last two flash sectors as its areas, with the minimum size of 4KBs,
+    meaning that if the sectors are smaller, few continuous ones will be used for each area.
+    You can override this by setting the addresses and sizes of both areas in` mbed_lib.json` on a per board basis. 
+	Copy `mbed_app-K64F-8KB-areas.json` to `mbed_app.json` and edit mbed_app.json according to your board.
+	This should use 8KB areas (two pairs of last sectors) as NVStore areas.
+    In this case, all following four attributes need to be set:
+-   area_1_address
+-   area_1_size
+-   area_2_address
+-   area_2_size
+ 
  9. Repeat steps 3-7. Notice the changes in prints of area addresses and sizes and with the amount of possible keys this configuration can hold.
 
 10. To restore the default configuration, copy `mbed_app-default-areas.json` to `mbed_app.json`.
