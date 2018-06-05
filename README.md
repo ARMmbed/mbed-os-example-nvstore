@@ -53,7 +53,8 @@ Although the board shown in this examples is K64F, the example should work on an
     If the automatically selected sectors do not fit your flash configuration, you can override this by setting the addresses and sizes of both areas in `mbed_lib.json` for each board. 
     
 	Copy `mbed_app-K64F-8KB-areas.json` to `mbed_app.json` and edit `mbed_app.json` to match your board.
-	This example is defining 2 areas of 8KB each (the last four sectors) as NVStore areas.
+	
+	This example defines two areas of 8KB each (the last four sectors) as NVStore areas.
         
 	Set the following four attributes:
         
@@ -63,7 +64,6 @@ Although the board shown in this examples is K64F, the example should work on an
 	-   `area_2_size`
 	
 	
-
  9. Repeat steps 3-7. Notice the changes in prints of area addresses and sizes and with the amount of possible keys this configuration can hold.
 
 10. To restore the default configuration, copy `mbed_app-default-areas.json` to `mbed_app.json`.
